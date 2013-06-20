@@ -48,6 +48,8 @@ java -jar JavadocPatchTool.jar -R <Path_to_Javadoc>
 Build it:
 ------
 
+git clone https://github.com/olamy/JavadocUpdaterTool.git && cd JavadocUpdaterTool
+
 mvn clean install
 
 java -jar target/javadoc-updater-maven-plugin-0.1-SNAPSHOT.jar -R -C <Path_to_Javadoc>
@@ -65,6 +67,11 @@ Maven Usage:
             <goals>
               <goal>fixjavadoc</goal>
             </goals>
+            <configuration>
+              <!-- by default check target/site if apidocs are not here change the value
+              <directory>${project.reporting.outputDirectory}</directory>
+              -->
+            </configuration>
           </execution>
         </executions>
       </plugin>

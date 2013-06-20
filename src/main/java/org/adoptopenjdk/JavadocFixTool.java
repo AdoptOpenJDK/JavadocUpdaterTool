@@ -170,7 +170,7 @@ public class JavadocFixTool {
         // Last argument should be a path to the document root
         String name = args[args.length-1];
 
-        boolean recursive = false, doPatch = false;
+        boolean recursive = false, doPatch = true;
 
         // Analyze the rest of parameters
         for (int i = 0 ; i < args.length -1; i++) {

@@ -14,11 +14,11 @@ public class JavadocFixToolMojo
     extends AbstractMojo
 {
 
-    @Parameter( defaultValue = "${project.build.directory}/apidocs" )
+    @Parameter( defaultValue = "${project.reporting.outputDirectory}" )
     private String directory;
 
-    @Parameter( defaultValue = "false" )
-    private boolean recurse;
+    @Parameter( defaultValue = "true" )
+    private boolean recurse = true;
 
     @Parameter( defaultValue = "false" )
     private boolean doPatch;

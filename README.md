@@ -44,3 +44,28 @@ where <Path_to_folder> is the path to the directory which contains the applicabl
 To fix all the applicable files in the tree, run the following command:
 
 java -jar JavadocPatchTool.jar -R <Path_to_Javadoc>
+
+Build it:
+------
+
+mvn clean install
+
+java -jar target/javadoc-updater-maven-plugin-0.1-SNAPSHOT.jar -R -C <Path_to_Javadoc>
+
+Maven Usage:
+------
+
+      <plugin>
+        <groupId>org.adoptopenjdk</groupId>
+        <artifactId>javadoc-updater-maven-plugin</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>site</phase>
+            <goals>
+              <goal>fixjavadoc</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+

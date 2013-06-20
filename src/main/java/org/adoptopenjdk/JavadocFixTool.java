@@ -1,4 +1,4 @@
-/*
+package org.adoptopenjdk;/*
  * Copyright (c) 2013 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
  *
@@ -145,8 +145,14 @@ public class JavadocFixTool {
     private static String readme = null;
     private static String version = "Java Documentation Updater Tool version 1.2 06/14/2013\n";
 
-    private static boolean doPatch = true; // By default patch file
-    private static boolean recursive = false; // By default only look in the folder in parameter
+    private boolean doPatch = true; // By default patch file
+    private boolean recursive = false; // By default only look in the folder in parameter
+
+    public JavadocFixTool( boolean doPatch, boolean recursive )
+    {
+        this.doPatch = doPatch;
+        this.recursive = recursive;
+    }
 
     public static void main(String[] args) {
         System.out.println(version);
@@ -164,6 +170,8 @@ public class JavadocFixTool {
         // Last argument should be a path to the document root
         String name = args[args.length-1];
 
+        boolean recursive = false, doPatch = false;
+
         // Analyze the rest of parameters
         for (int i = 0 ; i < args.length -1; i++) {
             if ("-R".equalsIgnoreCase(args[i])) {
@@ -176,7 +184,7 @@ public class JavadocFixTool {
                 return;
             }
         }
-        new JavadocFixTool().proceed(name);
+        new JavadocFixTool(doPatch, recursive).proceed(name);
     }
 
     /*

@@ -20,7 +20,7 @@ public class JavadocFixToolMojo
     @Parameter( defaultValue = "true" )
     private boolean recurse = true;
 
-    @Parameter( defaultValue = "false" )
+    @Parameter( defaultValue = "true" )
     private boolean doPatch;
 
     @Override

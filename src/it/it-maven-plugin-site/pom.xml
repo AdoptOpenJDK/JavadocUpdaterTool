@@ -56,6 +56,9 @@ under the License.
             <goals>
               <goal>fixjavadoc</goal>
             </goals>
+            <configuration>
+              <doPatch>false</doPatch>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -63,6 +66,7 @@ under the License.
   </build>
 
   <reporting>
+    <excludeDefaults>true</excludeDefaults>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

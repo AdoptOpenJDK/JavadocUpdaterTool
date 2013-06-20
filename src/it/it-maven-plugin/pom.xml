@@ -58,6 +58,7 @@ under the License.
             </goals>
             <configuration>
               <directory>${basedir}/apidocs</directory>
+              <doPatch>false</doPatch>
             </configuration>
           </execution>
         </executions>

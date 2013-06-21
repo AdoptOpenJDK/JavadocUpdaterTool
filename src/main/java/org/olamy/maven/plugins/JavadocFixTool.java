@@ -1,4 +1,4 @@
-package org.adoptopenjdk;/*
+package org.olamy.maven.plugins;/*
  * Copyright (c) 2013 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
  *

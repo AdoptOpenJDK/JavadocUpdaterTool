@@ -8,3 +8,5 @@
 target
 *.iml
 
+.java-version
+

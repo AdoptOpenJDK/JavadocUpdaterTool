@@ -58,7 +58,7 @@ Maven Usage:
 ------
 
       <plugin>
-        <groupId>org.adoptopenjdk</groupId>
+        <groupId>org.olamy.maven.plugins</groupId>
         <artifactId>javadoc-updater-maven-plugin</artifactId>
         <version>0.1-SNAPSHOT</version>
         <executions>

@@ -48,7 +48,7 @@ java -jar JavadocPatchTool.jar -R <Path_to_Javadoc>
 Build it:
 ------
 
-git clone https://github.com/olamy/JavadocUpdaterTool.git && cd JavadocUpdaterTool
+git clone https://github.com/AdoptOpenJDK/JavadocUpdaterTool.git && cd JavadocUpdaterTool
 
 mvn clean install
 
@@ -58,7 +58,7 @@ Maven Usage:
 ------
 
       <plugin>
-        <groupId>org.olamy.maven.plugins</groupId>
+        <groupId>org.adoptopenjdk.maven.plugins</groupId>
         <artifactId>javadoc-updater-maven-plugin</artifactId>
         <version>0.1-SNAPSHOT</version>
         <executions>

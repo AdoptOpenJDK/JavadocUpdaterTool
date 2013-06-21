@@ -1,4 +1,4 @@
-package org.olamy.maven.plugins;
+package org.adoptopenjdk.maven.plugins;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

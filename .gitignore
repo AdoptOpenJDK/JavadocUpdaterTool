@@ -5,8 +5,14 @@
 *.war
 *.ear
 
-target
+target/
+
+# intelliJ
 *.iml
 
 .java-version
 
+# Eclipse
+.classpath
+.project
+.settings/

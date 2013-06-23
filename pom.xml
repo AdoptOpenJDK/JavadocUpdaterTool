@@ -105,6 +105,11 @@
   <version>0.1-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
+  <scm>
+    <connection>scm:git:git://github.com/AdoptOpenJDK/JavadocUpdaterTool.git</connection>
+    <developerConnection>scm:git:git@github.com:AdoptOpenJDK/JavadocUpdaterTool.git</developerConnection>
+    <url>https://github.com/AdoptOpenJDK/JavadocUpdaterTool</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

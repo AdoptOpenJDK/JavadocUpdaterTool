@@ -1,4 +1,3 @@
-package org.adoptopenjdk.maven.plugins;
 /*
  * Copyright (c) 2013 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
@@ -84,14 +83,17 @@ package org.adoptopenjdk.maven.plugins;
  * 
  * Last updated: 14 June 2013
  */
+package org.adoptopenjdk.maven.plugins;
+
 import java.io.*;
 
-/*
+/**
  * Tool for finding and addressing files related to CVE-2013-1571.
  * See README file for details.
  */
 public class JavadocFixTool {
-    // Usual suspects
+
+    // Array of the usual starting points
     private final static String[] fileNames = {"index.html",
                                          "index.htm",
                                          "toc.html",
@@ -99,6 +101,7 @@ public class JavadocFixTool {
 
     // If we locate this function but not validURL - we are in trouble
     private final String patchString = "function loadFrames() {";
+
     // Main fix - should be inserted before the loadFrames() function alongside
     // the code that calls this function
     private final static String[] patchData =
@@ -198,14 +201,15 @@ public class JavadocFixTool {
         out.println("    -C : Check only - program will find vulnerable files and print their full paths");
     }
 
-    /*
+    /**
      * Lazily initialize the readme document, reading it from README file inside the jar
      */
     public static void initReadme() {
+        BufferedReader readmeReader = null;
         try {
             InputStream readmeStream = JavadocFixTool.class.getResourceAsStream("/README");
             if (readmeStream != null) {
-                BufferedReader readmeReader = new BufferedReader(new InputStreamReader(readmeStream));
+                readmeReader = new BufferedReader(new InputStreamReader(readmeStream));
                 StringBuilder readmeBuilder = new StringBuilder();
                 String s;
                 while ((s = readmeReader.readLine()) != null) {
@@ -214,10 +218,20 @@ public class JavadocFixTool {
                 }
                 readme = readmeBuilder.toString();
             }
-        } catch (IOException ignore) {} // Ignore exception - readme not initialized
+        } catch (IOException ignore) {
+            // Ignore IOException - readme not initialized
+        } finally {
+            if(readmeReader != null) {
+                try {
+                    readmeReader.close();
+                } catch (IOException exception) {
+                    System.err.println("Error in closing README file, this should be OK as long as the tool terminates.");
+                }
+            }
+        }
     }
 
-    /*
+    /**
      * Main procedure - proceed with the searching and/or fixing depending on
      * the command line parameters
      * @param name Path to the document root
@@ -231,10 +245,12 @@ public class JavadocFixTool {
                 System.err.println("Invalid folder in parameter \""+name+"\"");
                 printUsage(System.err);
             }
-        } catch (Exception ignored) {} // Die silently
+        } catch (Exception ignored) {
+            // Die silently
+        }
     }
 
-    /*
+    /**
      * Find all the files that match the list given in the fileNames array.
      * If file found attempt to patch it.
      * If global parameter recursive is set to true attempt to go into the enclosed subfolders
@@ -273,7 +289,7 @@ public class JavadocFixTool {
         }
     }
 
-    /*
+    /**
      * Try to apply patch to the single file in the specific folder
      * If global parameter doPatch is false we should only print the location of the vulnerable html file
      * and return
@@ -289,6 +305,7 @@ public class JavadocFixTool {
             line = br.readLine();
             if (line == null) {
                 // File less than 80 lines long, no signature encountered
+                br.close();
                 return;
             }
             if (line.trim().equals("function validURL(url) {")) { // Already patched
@@ -311,19 +328,21 @@ public class JavadocFixTool {
                         replaceStringInFile(currentFolder, file, failedString, patch);
                     }
                 }
+                br.close();
                 return;
             }
         }
+        br.close();
     }
 
-    /*
+    /**
      * Replace one line in the given file in the given folder with the lines given
      * @param folder Folder in which file should be created
      * @param file Original file to patch
      * @param template Trimmed String with the pattern we are have to find
      * @param replacement Array of String that has to be written in the place of first line matching the template
      */
-    public void replaceStringInFile(File folder, File file, String template, String[] replacement)
+    public static void replaceStringInFile(File folder, File file, String template, String[] replacement)
             throws IOException {
         System.out.println("Patching file: "+file.getCanonicalPath());
         String name = file.getName();
@@ -347,12 +366,13 @@ public class JavadocFixTool {
                 pw.println(line);
             }
         }
+        br.close();
         pw.flush();
         pw.close();
         if (!temporaryFile.renameTo(new File(folder, name))) {
-            throw new IOException("Unable to rename file in folder "+folder.getName()+
-                    " from \""+temporaryFile.getName()+"\" into \""+name +
-                    "\n Original file saved as "+origFile.getName());
+            throw new IOException("Unable to rename file in folder " + folder.getName() +
+                    " from \"" + temporaryFile.getName() +"\" into \"" + name +
+                    "\n Original file saved as " + origFile.getName());
         }
         origFile.delete();
     }

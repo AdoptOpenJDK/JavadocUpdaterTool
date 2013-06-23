@@ -23,7 +23,6 @@ public class JavadocFixToolMojo
     @Parameter( defaultValue = "true" )
     private boolean doPatch;
 
-    @Override
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {

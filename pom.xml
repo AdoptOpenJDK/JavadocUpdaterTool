@@ -80,10 +80,6 @@
     <url>https://github.com/AdoptOpenJDK/JavadocUpdaterTool</url>
     <inceptionYear>2013</inceptionYear>
 
-    <prerequisites>
-        <maven>3.0.5</maven>
-    </prerequisites>
-
     <licenses>
         <license>
             <name>Oracle License for Javadoc Updater Tool</name>

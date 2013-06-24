@@ -293,8 +293,15 @@
                     </reportPlugins>
                 </configuration>
             </plugin>
-
         </plugins>
+        <resources>
+            <resource>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>
